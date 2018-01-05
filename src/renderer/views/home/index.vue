@@ -1,34 +1,34 @@
 <style lang="less" src="./styles/index.less"></style>
 <template>
   <div>
-    <header class="navbar-dark fixed-top">
+    <header class="fixed nav b-dark">
       <el-menu :default-active="activeIndex" class="menu-header" mode="horizontal" @select="navChange">
         <el-menu-item index="1">新任务</el-menu-item>
         <el-submenu index="2">任务管理</el-submenu>
         <el-menu-item index="3">订单管理</el-menu-item>
       </el-menu>
     </header>
-    <main class="container-fluid">
+    <main class="absolute main b-blue">
       <transition appear enter-active-class="animated zoomInDown">
         <router-view ref="views"></router-view>
       </transition>
     </main>
-    <footer class="fixed-bottom border border-info border-left-0 border-right-0 border-bottom-0 bg-white">
-      <div class="d-flex flex-row justify-content-between font-size-14">
-        <div class="p-2">
-          <div class="text-info" v-if="loginName">
-            <i class="iconfont icon-user"></i>
+    <footer class="fixed footer b-cyan">
+      <div class="flex flex-row justify-between">
+        <div class="user-info">
+          <div class="text-info align-center" v-if="loginName">
+            <i class="fa fa-user-o"></i>
             <span>{{loginName}}，</span>
             <a href="javascript:;" @click="logOff">退出</a>
           </div>
-          <a class="text-info waves-effect" href="javascript:;" v-else>
-            <i class="iconfont icon-user"></i>
+          <a class="text-info align-center" href="javascript:;" v-else>
+            <i class="fa fa-user-o"></i>
             <span>未登录</span>
           </a>
         </div>
-        <div class="p-2">
+        <div class="about">
           <a class="text-info waves-effect" href="javascript:;" @click="openAbout">
-            <i class="iconfont icon-help"></i>
+            <i class="fa fa-user-o"></i>
             <span>关于</span>
           </a>
         </div>
