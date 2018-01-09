@@ -1,85 +1,32 @@
 <style lang="less" src="./styles/index.less"></style>
 <template>
   <div>
-    <header class="fixed nav b-dark">
+    <header class="fixed nav flex-row justify-center">
       <el-menu :default-active="activeIndex" class="menu-header" mode="horizontal" @select="navChange">
         <el-menu-item index="1">新任务</el-menu-item>
-        <el-submenu index="2">任务管理</el-submenu>
+        <el-menu-item index="2">任务管理</el-menu-item>
         <el-menu-item index="3">订单管理</el-menu-item>
       </el-menu>
     </header>
-    <main class="absolute main b-blue">
+    <main class="absolute main">
       <transition appear enter-active-class="animated zoomInDown">
         <router-view ref="views"></router-view>
       </transition>
     </main>
-    <footer class="fixed footer b-cyan">
-      <div class="flex flex-row justify-between">
-        <div class="user-info">
-          <div class="text-info align-center" v-if="loginName">
-            <i class="fa fa-user-o"></i>
-            <span>{{loginName}}，</span>
-            <a href="javascript:;" @click="logOff">退出</a>
-          </div>
-          <a class="text-info align-center" href="javascript:;" v-else>
-            <i class="fa fa-user-o"></i>
-            <span>未登录</span>
-          </a>
+    <footer class="fixed footer">
+      <div class="footer-main flex-row justify-between">
+        <div class="text-info" v-if="loginName">
+          <i class="fa fa-user-o"></i>
+          <span>{{loginName}}，</span>
+          <el-button type="primary" @click="logOff">退出</el-button>
         </div>
-        <div class="about">
-          <a class="text-info waves-effect" href="javascript:;" @click="openAbout">
-            <i class="fa fa-user-o"></i>
-            <span>关于</span>
-          </a>
-        </div>
+        <el-button type="primary" v-else><i class="fa fa-user-o"></i>未登录</el-button>
+        <el-button type="primary" @click="openAbout"><i class="fa fa-user-o"></i>关于</el-button>
       </div>
     </footer>
-    
+    <login ref="loginModal"></login>
   </div>
-    <!-- <header class="navbar-dark fixed-top">
-      <div class="navbar-nav-scroll">
-        <b-nav class="navbar-nav flex-row justify-content-center text-center bg-nav-hue">
-          <b-nav-item class="waves-effect" :active-class="nav.activeClass" v-for="(nav, index) in navItems" :key="index" :to="nav.to" @click="navChange(nav)">
-            <i class="iconfont" :class="`icon-${nav.icon}`"></i>
-            <p>
-              {{nav.text}}
-              <b-badge class="badge-count" pill variant="danger" v-if="index === 1 && $store.getters.taskData.length">
-                {{$store.getters.taskData.length}}
-              </b-badge>
-              <b-badge class="badge-count" pill variant="danger" v-else-if="index === 2 && $store.getters.orderCount">
-                {{$store.getters.orderCount}}
-              </b-badge>
-            </p>
-          </b-nav-item>
-        </b-nav>
-      </div>
-    </header>
-    <main class="container-fluid">
-      <transition appear enter-active-class="animated zoomInDown">
-        <router-view ref="views"></router-view>
-      </transition>
-    </main>
-    <footer class="fixed-bottom border border-info border-left-0 border-right-0 border-bottom-0 bg-white">
-      <div class="d-flex flex-row justify-content-between font-size-14">
-        <div class="p-2">
-          <div class="text-info" v-if="loginName">
-            <i class="iconfont icon-user"></i>
-            <span>{{loginName}}，</span>
-            <a href="javascript:;" @click="logOff">退出</a>
-          </div>
-          <a class="text-info waves-effect" href="javascript:;" v-b-modal.loginModal v-else>
-            <i class="iconfont icon-user"></i>
-            <span>未登录</span>
-          </a>
-        </div>
-        <div class="p-2">
-          <a class="text-info waves-effect" href="javascript:;" @click="openAbout">
-            <i class="iconfont icon-help"></i>
-            <span>关于</span>
-          </a>
-        </div>
-      </div>
-    </footer>
+    <!--
     <login ref="loginModal"></login>
     <captcha-code :type="captchaCodeType" @validComplete="validComplete"></captcha-code>
     <about :show.sync="showAbout" />
@@ -94,7 +41,7 @@
 export default {
   name: 'Home',
   components: {
-    // Login: () => import('../user/Login'),
+    Login: () => import('../user/Login')
     // CaptchaCode: () => import('./CaptchaCode'),
     // About: () => import('../about/About')
   },

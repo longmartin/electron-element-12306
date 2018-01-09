@@ -1,5 +1,30 @@
 <template>
-  <b-modal id="loginModal" title="登录" :okOnly="true" @shown="dialogShow">
+  <el-dialog
+  title="提示"
+  :visible.sync="modal"
+  width="30%"
+  center>
+    <el-form ref="screen_form" :model="{}" :rules="formRules" label-width="125px" label-position="left" >
+      <el-form-item label="账号" prop="Name">
+        <el-input v-model="userName" placeholder="请输入12306账号"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="Name">
+        <el-input v-model="password" placeholder="请输入密码"></el-input>
+      </el-form-item> 
+      <el-form-item>
+        <el-checkbox v-model="rememberme">记住我？</el-checkbox>
+        <el-checkbox v-model="autoLogin">自动登录</el-checkbox>
+      </el-form-item>
+    </el-form>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="modal = false">取 消</el-button>
+      <el-button type="primary" @click="handleSubmit('screen_form')">登录</el-button>
+    </span>
+  </el-dialog>
+
+
+
+  <!-- <b-modal id="loginModal" title="登录" :okOnly="true" @shown="dialogShow">
     <form @submit.stop.prevent="login">
       <b-input-group left="账号" class="form-group">
         <b-autocomplete ref="txtLoginUser" class="col pl-sm-0 pr-sm-0" inputClass="bl-rounded-0 rounded-right" placeholder="输入用户名/邮箱/手机号" v-model="userInfo" :dropdownData="loginUsers" @onSelect="selectLoginUser" @inputChange="inputChange"></b-autocomplete>
@@ -19,22 +44,24 @@
       </div>
     </form>
     <b-button slot="modal-footer" variant="info" class="waves-effect" @click="login">登录</b-button>
-  </b-modal>
+  </b-modal> -->
 </template>
 
 <script>
-import utils from '../scripts/utils'
+import utils from '../../libs/utils'
 
 export default {
   name: 'Login',
   data () {
     return {
+      modal: false,
       loginUsers: [],
       userInfo: null,
       userName: '',
       password: '',
       rememberme: true,
-      autoLogin: true
+      autoLogin: true,
+      formRules: []
     }
   },
   watch: {
