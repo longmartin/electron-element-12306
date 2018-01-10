@@ -1,50 +1,27 @@
+<style lang="less" src="./styles/index.less" scoped></style>
 <template>
   <el-dialog
-  title="提示"
-  :visible.sync="modal"
-  width="30%"
+  title="登录"
+  :visible.sync="show"
+  width="50%"
   center>
-    <el-form ref="screen_form" :model="{}" :rules="formRules" label-width="125px" label-position="left" >
+    <el-form ref="login_form" :model="formData" :rules="{}" label-width="3rem">
       <el-form-item label="账号" prop="Name">
-        <el-input v-model="userName" placeholder="请输入12306账号"></el-input>
+        <el-input v-model="formData.username" placeholder="请输入12306账号"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="Name">
-        <el-input v-model="password" placeholder="请输入密码"></el-input>
+        <el-input v-model="formData.password" placeholder="请输入密码"></el-input>
       </el-form-item> 
       <el-form-item>
-        <el-checkbox v-model="rememberme">记住我？</el-checkbox>
-        <el-checkbox v-model="autoLogin">自动登录</el-checkbox>
+        <el-checkbox v-model="formData.rememberme">记住我？</el-checkbox>
+        <el-checkbox v-model="formData.autoLogin">自动登录</el-checkbox>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="modal = false">取 消</el-button>
-      <el-button type="primary" @click="handleSubmit('screen_form')">登录</el-button>
+      <el-button type="primary" @click="login">登录</el-button>
     </span>
   </el-dialog>
-
-
-
-  <!-- <b-modal id="loginModal" title="登录" :okOnly="true" @shown="dialogShow">
-    <form @submit.stop.prevent="login">
-      <b-input-group left="账号" class="form-group">
-        <b-autocomplete ref="txtLoginUser" class="col pl-sm-0 pr-sm-0" inputClass="bl-rounded-0 rounded-right" placeholder="输入用户名/邮箱/手机号" v-model="userInfo" :dropdownData="loginUsers" @onSelect="selectLoginUser" @inputChange="inputChange"></b-autocomplete>
-      </b-input-group>
-      <b-input-group left="密码" class="form-group">
-        <b-form-input type="password" placeholder="输入密码" v-model="password" @keyup.enter="login"></b-form-input>
-      </b-input-group>
-      <div class="form-row">
-        <div class="checkbox icheck-info col-6">
-          <input type="checkbox" id="chkRememberme" v-model="rememberme" />
-          <label for="chkRememberme">记住我？</label>
-        </div>
-        <div class="checkbox icheck-info col-6 text-right">
-          <input type="checkbox" id="chkAutoLogin" v-model="autoLogin" />
-          <label for="chkAutoLogin">自动登录</label>
-        </div>
-      </div>
-    </form>
-    <b-button slot="modal-footer" variant="info" class="waves-effect" @click="login">登录</b-button>
-  </b-modal> -->
 </template>
 
 <script>
@@ -54,13 +31,10 @@ export default {
   name: 'Login',
   data () {
     return {
-      modal: false,
+      show: false,
       loginUsers: [],
       userInfo: null,
-      userName: '',
-      password: '',
-      rememberme: true,
-      autoLogin: true,
+      formData: {username: '', password: '', rememberme: true, autologin: true},
       formRules: []
     }
   },

@@ -18,13 +18,15 @@
         <div class="text-info" v-if="loginName">
           <i class="fa fa-user-o"></i>
           <span>{{loginName}}，</span>
-          <el-button type="primary" @click="logOff">退出</el-button>
+          <el-button type="primary" @click="logout">退出</el-button>
         </div>
-        <el-button type="primary" v-else><i class="fa fa-user-o"></i>未登录</el-button>
+        <el-button type="primary" @click="openLogin" v-else><i class="fa fa-user-o"></i>未登录</el-button>
         <el-button type="primary" @click="openAbout"><i class="fa fa-user-o"></i>关于</el-button>
+        
       </div>
     </footer>
     <login ref="loginModal"></login>
+    <about ref="aboutModal"></about>
   </div>
     <!--
     <login ref="loginModal"></login>
@@ -41,9 +43,9 @@
 export default {
   name: 'Home',
   components: {
-    Login: () => import('../user/Login')
+    Login: () => import('../user/Login'),
     // CaptchaCode: () => import('./CaptchaCode'),
-    // About: () => import('../about/About')
+    About: () => import('../about/About')
   },
   data () {
     return {
@@ -143,12 +145,25 @@ export default {
     //     }
     //   }
     // },
-    // 关于
+
+    /**
+     * 打开关于窗口
+     */
     openAbout () {
-      this.showAbout = true
+      this.$refs.aboutModal.show = true
     },
-    // // 退出登录
-    async logOff () {
+
+    /**
+     * 打开登录窗口
+     */
+    openLogin () {
+      this.$refs.loginModal.show = true
+    },
+
+    /**
+     * 退出登录
+     */
+    async logout () {
       // await this.$api.loginOff()
       // // 清除登录信息
       // this.loginName = ''
