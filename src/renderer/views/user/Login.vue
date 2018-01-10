@@ -6,15 +6,15 @@
   width="50%"
   center>
     <el-form ref="login_form" :model="formData" :rules="{}" label-width="3rem">
-      <el-form-item label="账号" prop="Name">
+      <el-form-item label="账号" prop="username">
         <el-input v-model="formData.username" placeholder="请输入12306账号"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="Name">
-        <el-input v-model="formData.password" placeholder="请输入密码"></el-input>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="formData.password" placeholder="请输入密码"></el-input>
       </el-form-item> 
       <el-form-item>
-        <el-checkbox v-model="formData.rememberme">记住我？</el-checkbox>
-        <el-checkbox v-model="formData.autoLogin">自动登录</el-checkbox>
+        <el-checkbox v-model="rememberme" label="记住我？" name="rememberme"></el-checkbox>
+        <el-checkbox v-model="autologin" label="自动登录" name="autologin"></el-checkbox>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -34,17 +34,19 @@ export default {
       show: false,
       loginUsers: [],
       userInfo: null,
-      formData: {username: '', password: '', rememberme: true, autologin: true},
+      formData: {username: '', password: ''},
+      rememberme: true,
+      autologin: true,
       formRules: []
     }
   },
   watch: {
     rememberme (value) {
       if (!value) {
-        this.autoLogin = false
+        this.autologin = false
       }
     },
-    autoLogin (value) {
+    autologin (value) {
       if (value) {
         this.rememberme = true
       }
@@ -73,18 +75,27 @@ export default {
         this.login()
       }
     },
+
     inputChange (value) {
       this.userName = value
     },
-    // 登录
+
+    /**
+     * 登录
+     */
     login () {
       if (!this.userName || !this.password) {
-        this.$alert('账号或密码不能为空')
+        this.$message({
+          'type': 'warning',
+          'message': '账号或密码不能为空',
+          'showClose': true,
+          'duration': 1000
+        })
         return false
       }
-
-      this.$root.$emit('bv::hide::modal', 'loginModal')
-      this.$root.$emit('bv::show::modal', 'captchCodeModal')
+      return true
+      // this.$root.$emit('bv::hide::modal', 'loginModal')
+      // this.$root.$emit('bv::show::modal', 'captchCodeModal')
     }
   }
 }

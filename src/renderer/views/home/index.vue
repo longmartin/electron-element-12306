@@ -1,19 +1,19 @@
 <style lang="less" src="./styles/index.less"></style>
 <template>
-  <div>
-    <header class="fixed nav flex-row justify-center">
+  <el-container>
+    <el-header class="fixed nav flex-row justify-center">
       <el-menu :default-active="activeIndex" class="menu-header" mode="horizontal" @select="navChange">
         <el-menu-item index="1">新任务</el-menu-item>
         <el-menu-item index="2">任务管理</el-menu-item>
         <el-menu-item index="3">订单管理</el-menu-item>
       </el-menu>
-    </header>
-    <main class="absolute main">
+    </el-header>
+    <el-main class="absolute main">
       <transition appear enter-active-class="animated zoomInDown">
         <router-view ref="views"></router-view>
       </transition>
-    </main>
-    <footer class="fixed footer">
+    </el-main>
+    <el-footer class="fixed footer">
       <div class="footer-main flex-row justify-between">
         <div class="text-info" v-if="loginName">
           <i class="fa fa-user-o"></i>
@@ -24,17 +24,14 @@
         <el-button type="primary" @click="openAbout"><i class="fa fa-user-o"></i>关于</el-button>
         
       </div>
-    </footer>
+    </el-footer>
     <login ref="loginModal"></login>
     <about ref="aboutModal"></about>
-  </div>
-    <!--
-    <login ref="loginModal"></login>
+  </el-container>    
+    <!-- <login ref="loginModal"></login>
     <captcha-code :type="captchaCodeType" @validComplete="validComplete"></captcha-code>
     <about :show.sync="showAbout" />
-    -->
-    <!-- <audio id="audioEgg" :src="audioEggUrl" preload="auto" loop style="display: none;" hidden="true"></audio> -->
-  </div>
+    <audio id="audioEgg" :src="audioEggUrl" preload="auto" loop style="display: none;" hidden="true"></audio> -->
 </template>
 
 <script>
