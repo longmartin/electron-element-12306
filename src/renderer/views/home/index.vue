@@ -2,18 +2,18 @@
 <template>
   <el-container>
     <el-header class="fixed nav flex-row justify-center">
-      <el-menu :default-active="activeIndex" class="menu-header" mode="horizontal" @select="navChange">
-        <el-menu-item index="1">新任务</el-menu-item>
-        <el-menu-item index="2">任务管理</el-menu-item>
-        <el-menu-item index="3">订单管理</el-menu-item>
+      <el-menu :default-active="$route.path" class="menu-header" mode="horizontal" router>
+        <el-menu-item index="/">新任务</el-menu-item>
+        <el-menu-item index="/task">任务管理</el-menu-item>
+        <el-menu-item index="/order">订单管理</el-menu-item>
       </el-menu>
     </el-header>
     <el-main class="absolute main">
-      <transition appear enter-active-class="animated zoomInDown">
-        <router-view ref="views"></router-view>
-      </transition>
+      <!-- <transition appear enter-active-class="animated zoomInDown"> -->
+        <router-view></router-view>
+      <!-- </transition> -->
     </el-main>
-    <el-footer class="fixed footer">
+    <el-footer class="fixed footer" height="42">
       <div class="footer-main flex-row justify-between">
         <div class="text-info" v-if="loginName">
           <i class="fa fa-user-o"></i>

@@ -1,17 +1,17 @@
 <style lang="less" src="./styles/index.less" scoped></style>
 <template>
-  <div>task</div>
-</template> 
+  <div>order</div>
+</template>
 <script>
 export default {
-  name: 'Task',
+  name: 'Order',
   data () {
     return {
       show: false
     }
   },
   mounted () {
-    console.error('task')
+    console.error('order')
   },
   methods: {
     query (data) {

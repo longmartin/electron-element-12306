@@ -10,12 +10,13 @@ export default new Router({
     {
       path: '/',
       // name: 'landing-page',
-      component: Home
-      // children: [
-      //   {path: 'user', component: () => import('@/views/user')},
-      //   {path: 'task', component: () => import('@/views/task')},
-      //   {path: 'order', component: () => import('@/views/order')}
-      // ]
+      component: Home,
+      children: [
+        {path: '/', component: () => import('@/views/query')},
+        {path: '/user', component: () => import('@/views/user')},
+        {path: '/task', component: () => import('@/views/task')},
+        {path: '/order', component: () => import('@/views/order')}
+      ]
     }
   ]
 })
